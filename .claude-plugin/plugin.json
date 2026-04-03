@@ -1,0 +1,12 @@
+{
+  "name": "superpowers-with-codex",
+  "description": "Superpowers execution skills that delegate implementation to Codex while Claude handles orchestration and review.",
+  "version": "0.1.0",
+  "author": {
+    "name": "leehw"
+  },
+  "license": "MIT",
+  "keywords": ["superpowers", "codex", "delegation", "code-review", "orchestration"],
+  "skills": "./skills/",
+  "agents": "./agents/"
+}
