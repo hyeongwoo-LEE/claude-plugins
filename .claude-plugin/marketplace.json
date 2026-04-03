@@ -1,0 +1,21 @@
+{
+  "name": "hyeongwoo-lee-plugins",
+  "owner": {
+    "name": "hyeongwoo-LEE"
+  },
+  "metadata": {
+    "description": "Claude Code plugins — Codex delegation, workflow automation, and more",
+    "version": "0.1.0",
+    "pluginRoot": "./plugins"
+  },
+  "plugins": [
+    {
+      "name": "superpowers-with-codex",
+      "source": "./plugins/superpowers-with-codex",
+      "description": "Superpowers execution skills that delegate implementation to Codex while Claude handles orchestration and review.",
+      "version": "0.1.0",
+      "keywords": ["superpowers", "codex", "delegation", "code-review", "orchestration"],
+      "category": "development"
+    }
+  ]
+}
