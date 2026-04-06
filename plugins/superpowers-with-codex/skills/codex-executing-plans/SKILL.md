@@ -1,40 +1,36 @@
 ---
 name: codex-executing-plans
-description: Use when you have a written implementation plan and want Codex to handle implementation without review loops — requires codex plugin installed
+description: Use when you have a written implementation plan to execute in a separate session with review checkpoints — supports both Codex delegation and Claude-native execution
 ---
 
-# Codex Executing Plans
+# Executing Plans (Codex-Enhanced)
 
-Load plan, delegate each task to Codex sequentially, report when complete. No review loops — use codex-subagent-driven-development if you want spec and code quality reviews.
+Load plan, review critically, execute all tasks, report when complete. Supports both Codex-delegated and Claude-native execution paths.
 
-**Announce at start:** "I'm using codex-executing-plans to implement this plan. Codex will handle implementation."
+**Announce at start:** "I'm using codex-executing-plans to implement this plan."
 
-## Prerequisite Check
+## Step 0: Execution Mode Selection
 
-Before starting, verify codex-plugin-cc is available:
+Before starting, determine execution mode:
 
-1. Run `/codex:setup --json`
-2. If Codex is not available:
-   - Tell user: "codex plugin is required. Install with: `/plugin install codex@ai-agent-marketplace`"
-   - Stop execution
+1. Check if Codex is available: Run `/codex:setup --json`
+2. **If Codex IS available:**
+   - Ask the user: "Codex가 사용 가능합니다. 어떤 방식으로 실행할까요?\n  1. **Codex** — Codex에 구현을 위임합니다 (Claude 토큰 절약)\n  2. **Claude** — Claude 서브에이전트가 직접 구현합니다 (기존 방식)"
+   - Wait for user's choice before proceeding
+3. **If Codex is NOT available:**
+   - Announce: "Codex를 사용할 수 없어 Claude 방식으로 실행합니다."
+   - Proceed with Claude path
 
-## When to Use
-
-- You have a written implementation plan
-- You want Codex to handle implementation (save Claude tokens)
-- You don't need review loops between tasks
-- For review loops, use codex-subagent-driven-development instead
-
-## The Process
-
-### Step 1: Load and Review Plan
+## Step 1: Load and Review Plan
 
 1. Read plan file
-2. Review critically — identify any questions or concerns
-3. If concerns: raise them with user before starting
-4. If no concerns: create TodoWrite and proceed
+2. Review critically — identify any questions or concerns about the plan
+3. If concerns: Raise them with your human partner before starting
+4. If no concerns: Create TodoWrite and proceed
 
-### Step 2: Execute Tasks
+## Step 2: Execute Tasks
+
+### Path A: Codex Execution
 
 For each task:
 
@@ -51,18 +47,32 @@ For each task:
    - Job `failed` → retry with `--effort medium` or escalate
 5. Mark as completed
 
-### Step 3: Complete Development
+### Path B: Claude Execution
 
-After all tasks complete:
-- **REQUIRED SUB-SKILL:** Use superpowers:finishing-a-development-branch
+For each task:
+
+1. Mark as in_progress
+2. Follow each step exactly (plan has bite-sized steps)
+3. Run verifications as specified
+4. Mark as completed
+
+**Note:** If subagents are available, consider using codex-subagent-driven-development instead for higher quality with two-stage review.
+
+## Step 3: Complete Development
+
+After all tasks complete and verified:
+- Announce: "I'm using the finishing-a-development-branch skill to complete this work."
+- **REQUIRED SUB-SKILL:** Use superpowers:finishing-a-development-branch (if available)
+- Follow that skill to verify tests, present options, execute choice
 
 ## When to Stop and Ask for Help
 
 **STOP executing immediately when:**
-- Codex reports BLOCKED repeatedly
-- Task fails after retry with higher effort
-- Plan has critical gaps
+- Hit a blocker (missing dependency, test fails, instruction unclear)
+- Plan has critical gaps preventing starting
 - You don't understand an instruction
+- Verification fails repeatedly
+- (Codex path) Codex reports BLOCKED repeatedly or task fails after retry
 
 **Ask for clarification rather than guessing.**
 
@@ -70,12 +80,17 @@ After all tasks complete:
 
 **Never:**
 - Start implementation on main/master branch without explicit user consent
-- Skip the prerequisite check
-- Ignore Codex's BLOCKED or NEEDS_CONTEXT status
+- Skip the execution mode selection step
+- Ignore Codex's BLOCKED or NEEDS_CONTEXT status (Codex path)
+- Skip verifications (Claude path)
 - Force through blockers — stop and ask
 
 ## Integration
 
-**Required plugins:**
-- **superpowers** — writing-plans, finishing-a-development-branch, using-git-worktrees
-- **codex-plugin-cc** — Codex CLI integration
+**Required workflow skills (if superpowers plugin installed):**
+- **superpowers:using-git-worktrees** — Set up isolated workspace before starting
+- **superpowers:writing-plans** — Creates the plan this skill executes
+- **superpowers:finishing-a-development-branch** — Complete development after all tasks
+
+**Required for Codex path:**
+- **codex plugin** — Codex CLI integration

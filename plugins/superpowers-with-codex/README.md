@@ -1,33 +1,46 @@
 # superpowers-with-codex
 
-Superpowers execution skills that delegate implementation to Codex while Claude handles orchestration and review.
+Codex-enhanced execution skills that support both Codex delegation and Claude-native execution. Automatically detects Codex availability and lets the user choose their preferred execution mode.
 
 ## What It Does
 
-Provides Codex-powered alternatives to three superpowers execution skills:
+Provides enhanced versions of three execution skills that work **with or without Codex**:
 
-| Skill | Codex Role | Claude Role |
-|-------|-----------|-------------|
-| codex-subagent-driven-development | Implementation | Orchestration + Spec Review + Code Quality Review |
-| codex-executing-plans | Implementation | Orchestration |
-| codex-dispatching-parallel-agents | Parallel Implementation | Orchestration + Integration Review |
+| Skill | With Codex | Without Codex |
+|-------|-----------|---------------|
+| codex-subagent-driven-development | Codex implements, Claude reviews | Claude subagents implement and review |
+| codex-executing-plans | Codex implements tasks sequentially | Claude executes tasks directly |
+| codex-dispatching-parallel-agents | Codex runs tasks in parallel | Claude subagents run in parallel |
+
+## How It Works
+
+Each skill follows the same flow:
+
+1. **Detect Codex availability** — runs `/codex:setup --json`
+2. **If Codex available** — asks user: "Codex로 위임할까요, Claude로 실행할까요?"
+3. **If Codex not available** — automatically falls back to Claude-native execution
+4. **Execute** — follows the chosen path (Codex or Claude)
 
 ## Requirements
 
-- [superpowers](https://github.com/obra/superpowers) plugin installed
-- [codex-plugin-cc](https://github.com/openai/codex-plugin-cc) plugin installed
-- Codex CLI authenticated (`codex login`)
+**Required:**
+- None — works standalone with Claude-native execution
+
+**Optional (enables Codex delegation):**
+- [codex plugin](https://github.com/openai/codex-plugin-cc) installed and authenticated
+- [superpowers](https://github.com/obra/superpowers) plugin (for additional workflow skills like writing-plans, finishing-a-development-branch)
 
 ## Installation
 
 ```bash
-/plugin install <github-url>
+/plugin marketplace add hyeongwoo-LEE/claude-plugins
+/plugin install superpowers-with-codex
 ```
 
 ## Usage
 
-After `superpowers:writing-plans` completes, choose the Codex-powered execution option:
+These skills can be invoked directly or used after `superpowers:writing-plans` completes:
 
-- **codex-subagent-driven-development** — Codex implements, Claude reviews (recommended)
-- **codex-executing-plans** — Codex implements, no review loop
-- **codex-dispatching-parallel-agents** — parallel independent tasks via Codex
+- **codex-subagent-driven-development** — best for plans with independent tasks needing review
+- **codex-executing-plans** — best for sequential task execution without review loops
+- **codex-dispatching-parallel-agents** — best for 2+ independent tasks that can run concurrently
