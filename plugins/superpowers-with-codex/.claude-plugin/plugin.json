@@ -6,7 +6,5 @@
     "name": "leehw"
   },
   "license": "MIT",
-  "keywords": ["superpowers", "codex", "delegation", "code-review", "orchestration"],
-  "skills": "./skills/",
-  "agents": "./agents/"
+  "keywords": ["superpowers", "codex", "delegation", "code-review", "orchestration"]
 }
