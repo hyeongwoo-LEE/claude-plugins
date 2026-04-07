@@ -62,7 +62,7 @@ For each task:
 
 After all tasks complete and verified:
 - Announce: "I'm using the finishing-a-development-branch skill to complete this work."
-- **REQUIRED SUB-SKILL:** Use superpowers-with-codex:finishing-a-development-branch (if available)
+- **REQUIRED SUB-SKILL:** Use superpowers-with-codex:c-finishing-a-development-branch (if available)
 - Follow that skill to verify tests, present options, execute choice
 
 ## When to Stop and Ask for Help
@@ -88,9 +88,9 @@ After all tasks complete and verified:
 ## Integration
 
 **Required workflow skills (if superpowers plugin installed):**
-- **superpowers-with-codex:using-git-worktrees** — Set up isolated workspace before starting
-- **superpowers-with-codex:writing-plans** — Creates the plan this skill executes
-- **superpowers-with-codex:finishing-a-development-branch** — Complete development after all tasks
+- **superpowers-with-codex:c-using-git-worktrees** — Set up isolated workspace before starting
+- **superpowers-with-codex:c-writing-plans** — Creates the plan this skill executes
+- **superpowers-with-codex:c-finishing-a-development-branch** — Complete development after all tasks
 
 **Required for Codex path:**
 - **codex plugin** — Codex CLI integration
