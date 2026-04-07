@@ -181,8 +181,8 @@ find ~/.claude/plugins/cache -name "codex-companion.mjs" -path "*/codex/*/script
 ## Integration
 
 **Required workflow skills (if superpowers plugin installed):**
-- **superpowers:using-git-worktrees** — Set up isolated workspace before starting
-- **superpowers:finishing-a-development-branch** — Complete development after all tasks
+- **superpowers-with-codex:using-git-worktrees** — Set up isolated workspace before starting
+- **superpowers-with-codex:finishing-a-development-branch** — Complete development after all tasks
 
 **Required for Codex path:**
 - **codex plugin** — Codex CLI integration

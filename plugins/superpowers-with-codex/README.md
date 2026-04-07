@@ -1,10 +1,12 @@
 # superpowers-with-codex
 
-Codex-enhanced execution skills that support both Codex delegation and Claude-native execution. Automatically detects Codex availability and lets the user choose their preferred execution mode.
+A standalone plugin that includes all superpowers skills plus Codex-enhanced execution. Works independently — no need to install the superpowers plugin separately.
 
 ## What It Does
 
-Provides enhanced versions of three execution skills that work **with or without Codex**:
+Provides **all 14 superpowers skills** with 3 execution skills enhanced to support both Codex delegation and Claude-native execution:
+
+### Codex-Enhanced Execution Skills
 
 | Skill | With Codex | Without Codex |
 |-------|-----------|---------------|
@@ -12,23 +14,33 @@ Provides enhanced versions of three execution skills that work **with or without
 | codex-executing-plans | Codex implements tasks sequentially | Claude executes tasks directly |
 | codex-dispatching-parallel-agents | Codex runs tasks in parallel | Claude subagents run in parallel |
 
-## How It Works
+### Included Workflow Skills (from superpowers)
 
-Each skill follows the same flow:
+- **brainstorming** — Explore ideas and designs before implementation
+- **writing-plans** — Write comprehensive implementation plans
+- **finishing-a-development-branch** — Complete development and integrate work
+- **using-git-worktrees** — Create isolated workspaces for feature work
+- **test-driven-development** — Red-green-refactor cycle
+- **systematic-debugging** — 4-phase root cause investigation
+- **requesting-code-review** — Dispatch code review subagents
+- **receiving-code-review** — Technical evaluation of review feedback
+- **verification-before-completion** — Evidence before completion claims
+- **writing-skills** — TDD for skill documentation
+- **using-superpowers** — Skill discovery and usage
+
+## How Codex-Enhanced Skills Work
 
 1. **Detect Codex availability** — runs `/codex:setup --json`
-2. **If Codex available** — asks user: "Codex로 위임할까요, Claude로 실행할까요?"
+2. **If Codex available** — asks user: "Codex or Claude?"
 3. **If Codex not available** — automatically falls back to Claude-native execution
-4. **Execute** — follows the chosen path (Codex or Claude)
 
 ## Requirements
 
 **Required:**
-- None — works standalone with Claude-native execution
+- None — works standalone
 
-**Optional (enables Codex delegation):**
+**Optional (enables Codex delegation for execution skills):**
 - [codex plugin](https://github.com/openai/codex-plugin-cc) installed and authenticated
-- [superpowers](https://github.com/obra/superpowers) plugin (for additional workflow skills like writing-plans, finishing-a-development-branch)
 
 ## Installation
 
@@ -39,8 +51,10 @@ Each skill follows the same flow:
 
 ## Usage
 
-These skills can be invoked directly or used after `superpowers:writing-plans` completes:
+Start with brainstorming or writing-plans, then execute:
 
-- **codex-subagent-driven-development** — best for plans with independent tasks needing review
-- **codex-executing-plans** — best for sequential task execution without review loops
-- **codex-dispatching-parallel-agents** — best for 2+ independent tasks that can run concurrently
+```
+brainstorming → writing-plans → codex-subagent-driven-development → finishing-a-development-branch
+```
+
+Or invoke any skill directly as needed.

@@ -1,6 +1,6 @@
 {
   "name": "superpowers-with-codex",
-  "description": "Superpowers execution skills that delegate implementation to Codex while Claude handles orchestration and review.",
+  "description": "Standalone superpowers plugin with all 14 skills plus Codex-enhanced execution. Works without the superpowers plugin.",
   "version": "0.1.0",
   "author": {
     "name": "leehw"

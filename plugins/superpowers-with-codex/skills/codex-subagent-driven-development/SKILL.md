@@ -100,7 +100,7 @@ Parse the STATUS from output:
 
 After all tasks complete:
 - Dispatch final code reviewer subagent for entire implementation
-- **REQUIRED SUB-SKILL:** Use superpowers:finishing-a-development-branch (if available)
+- **REQUIRED SUB-SKILL:** Use superpowers-with-codex:finishing-a-development-branch (if available)
 
 ## Model Selection
 
@@ -219,13 +219,13 @@ Cache the path at the start of execution.
 ## Integration
 
 **Required workflow skills (if superpowers plugin installed):**
-- **superpowers:using-git-worktrees** — REQUIRED: Set up isolated workspace before starting
-- **superpowers:writing-plans** — Creates the plan this skill executes
-- **superpowers:requesting-code-review** — Code review template for reviewer subagents
-- **superpowers:finishing-a-development-branch** — Complete development after all tasks
+- **superpowers-with-codex:using-git-worktrees** — REQUIRED: Set up isolated workspace before starting
+- **superpowers-with-codex:writing-plans** — Creates the plan this skill executes
+- **superpowers-with-codex:requesting-code-review** — Code review template for reviewer subagents
+- **superpowers-with-codex:finishing-a-development-branch** — Complete development after all tasks
 
 **Required for Codex path:**
 - **codex plugin** — Codex CLI integration
 
 **Subagents should use (if available):**
-- **superpowers:test-driven-development** — Subagents follow TDD for each task
+- **superpowers-with-codex:test-driven-development** — Subagents follow TDD for each task
